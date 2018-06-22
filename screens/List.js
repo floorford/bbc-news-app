@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableHighlight, FlatList } from 'react-native';
 import moment from 'moment';
 
-const news = require('../resources/news.json');
-
 class List extends Component {
   constructor(props) {
     super(props)
 
     this.renderItem = this.renderItem.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.onLoad();
   }
 
   renderItem({ item }) {
@@ -40,9 +42,10 @@ class List extends Component {
   }
 
   render() {
+    const { news } = this.props;
     return (
-      <View style={ styles.container }>
-        <FlatList data={ news } renderItem={ this.renderItem } keyExtractor={this.keyExtractor} />
+      <View style={ styles.container }> { news.length > 0 ?
+        <FlatList data={ news } renderItem={ this.renderItem } keyExtractor={this.keyExtractor} /> : <Text>There's no news to display!</Text> }
       </View>
     )
   }

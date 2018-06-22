@@ -1,27 +1,26 @@
+// importing react, react native components and redux
 import React from 'react';
-import { StatusBar } from 'react-native';
 
-import { createStackNavigator } from 'react-navigation';
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
 
-import List from './screens/List'
-import Detail from './screens/Detail'
+import reducer from './data/reducer';
+import initial from './data/initial';
 
-// ************* Status Bar Stuff ***************
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducer, initial, composeEnhancers(applyMiddleware(thunk)));
 
-StatusBar.setBarStyle('light-content');
+// import the Main App component
+import Main from "./Main";
 
-// ************** Root Nav ****************
+// pass our store through to Main using props
+const App = () => (
+  <Provider store={ store }>
+    <Main />
+  </Provider>
+)
 
-const RootNavigator = createStackNavigator({
-  List: List,
-  Detail: Detail,
-}, {
-  navigationOptions: {
-    headerStyle: {
-        backgroundColor: '#bb1521'
-    },
-    headerTintColor: '#ffffff'
-  }
-});
+// Your API key is: 0696675ebd6e4a2990c238aeb6f6d8c5 for this API https://newsapi.org/
 
-export default RootNavigator;
+export default App;
