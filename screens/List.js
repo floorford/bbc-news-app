@@ -17,7 +17,7 @@ class List extends Component {
 
     onPress = (item) => {
       this.props.navigation.navigate('Detail', {
-        title: 'BBC News',
+        title: `Source: ${item.source.name}`,
         body: item
       })
     }
@@ -52,7 +52,7 @@ class List extends Component {
 }
 
 List.navigationOptions = {
-  title: 'BBC News',
+  title: 'Lastest News',
   headerBackTitle:'Back'
 }
 

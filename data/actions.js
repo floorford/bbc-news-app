@@ -2,7 +2,7 @@
 import axios from "./axios";
 
 export const getNews = () => dispatch => {
-  axios.get("/v2/top-headlines?country=us").then(({ data }) => {
+  axios.get("/v2/top-headlines?country=gb").then(({ data }) => {
     const articles = data.articles;
     console.log("HELLO HELLO" + articles)
 
